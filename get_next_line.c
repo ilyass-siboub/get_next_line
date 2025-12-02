@@ -6,7 +6,7 @@
 /*   By: isiboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 16:39:20 by isiboub           #+#    #+#             */
-/*   Updated: 2025/11/01 16:39:27 by isiboub          ###   ########.fr       */
+/*   Updated: 2025/12/02 10:47:07 by isiboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ static char	*read_and_fill(int fd, char *stash)
 	char	*buf;
 	ssize_t	bytes;
 
-	buf = malloc(BUFFER_SIZE + 1);
+	buf = malloc((size_t)BUFFER_SIZE + 1);
 	if (!buf)
-		return (NULL);
+		return (free(stash), NULL);
 	bytes = 1;
 	while (!ft_strchr_gnl(stash, '\n') && bytes > 0)
 	{
@@ -92,6 +92,8 @@ char	*get_next_line(int fd)
 	if (!stash)
 		return (NULL);
 	line = extract_line(stash);
+	if (!line)
+		return (free(stash), NULL);
 	stash = trim_stash(stash);
 	return (line);
 }

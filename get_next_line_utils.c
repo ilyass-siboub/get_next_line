@@ -6,7 +6,7 @@
 /*   By: isiboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 16:37:29 by isiboub           #+#    #+#             */
-/*   Updated: 2025/11/01 16:38:41 by isiboub          ###   ########.fr       */
+/*   Updated: 2025/11/27 21:26:26 by isiboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 		return (free(s1), NULL);
 	i = 0;
 	while (s1[i])
-		str[i++] = s1[i++];
+	{
+		str[i] = s1[i];
+		i++;
+	}
 	j = 0;
 	while (s2[j])
 		str[i++] = s2[j++];
