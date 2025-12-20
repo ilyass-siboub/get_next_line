@@ -6,7 +6,7 @@
 /*   By: isiboub <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 16:37:29 by isiboub           #+#    #+#             */
-/*   Updated: 2025/11/27 21:26:26 by isiboub          ###   ########.fr       */
+/*   Updated: 2025/12/05 12:29:47 by isiboub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,25 @@ char	*ft_strchr_gnl(char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin_gnl(char *s1, char *s2)
+static void	str_cpy(char *dst, char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
+
+	i = 0;
+	while (s1[i])
+	{
+		dst[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+		dst[i++] = s2[j++];
+	dst[i] = '\0';
+}
+
+char	*ft_strjoin_gnl(char *s1, char *s2)
+{
 	char	*str;
 
 	if (!s1 && !s2)
@@ -57,16 +72,6 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	str = malloc(ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1);
 	if (!str)
 		return (free(s1), NULL);
-	i = 0;
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	free(s1);
-	return (str);
+	str_cpy(str, s1, s2);
+	return (free(s1), str);
 }
